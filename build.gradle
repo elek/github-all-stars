@@ -1,0 +1,19 @@
+repositories {
+    mavenCentral();
+    maven { url = 'http://oss.sonatype.org/content/repositories/snapshots' }
+    maven { url = 'http://oss.sonatype.org/content/repositories/releases' }
+    maven { url = "http://repo.codahale.com" }
+}
+
+apply plugin: 'java'
+apply plugin: 'maven'
+apply plugin: 'idea'
+apply plugin: 'application'
+
+mainClassName = "net.anzix.githuballstars.Start"
+
+dependencies {
+    compile 'org.eclipse.jgit:org.eclipse.jgit:2.3.1.201302201838-r'
+    compile 'com.google.code.gson:gson:2.2.4'
+    compile 'args4j:args4j:2.0.23'
+}
