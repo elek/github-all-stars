@@ -1,3 +1,12 @@
+buildscript {
+  repositories {
+    mavenCentral()
+  }
+  dependencies {
+    classpath 'com.palantir:gradle-gitsemver:0.1.2'
+  }
+}
+
 repositories {
     mavenCentral();
     maven { url = 'http://oss.sonatype.org/content/repositories/snapshots' }
@@ -9,11 +18,20 @@ apply plugin: 'java'
 apply plugin: 'maven'
 apply plugin: 'idea'
 apply plugin: 'application'
+apply plugin: 'gitsemver'
 
 mainClassName = "net.anzix.githuballstars.Start"
+
 
 dependencies {
     compile 'org.eclipse.jgit:org.eclipse.jgit:2.3.1.201302201838-r'
     compile 'com.google.code.gson:gson:2.2.4'
     compile 'args4j:args4j:2.0.23'
+}
+
+jar {
+    from configurations.compile.collect { it.isDirectory() ? it : zipTree(it) }
+    manifest {
+      attributes("Main-Class": mainClassName, "Version": version)
+    }
 }
