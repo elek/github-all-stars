@@ -29,12 +29,12 @@ import java.util.regex.Pattern;
 public class Start {
 
 
-    @Argument(index = 0,metaVar = "userName", usage = "github user name", required = true)
+    @Argument(index = 0, metaVar = "userName", usage = "github user name", required = true)
     String userName;
 
     Pattern linkPattern = Pattern.compile("<(.*?)>; rel=\"(.*?)\"");
 
-    @Argument(index = 1,metaVar = "dest", usage = "Destination directory", required = false)
+    @Argument(index = 1, metaVar = "dest", usage = "Destination directory", required = false)
     String dst;
 
     Path destination = Paths.get(".");
@@ -55,11 +55,9 @@ public class Start {
     }
 
     private void run() throws Exception {
-	if (dst!=null) {
-	    destination = Paths.get(dst);
-	}
-        String link = "<https://api.github.com/user/170549/starred?page=2>; rel=\"next\", <https://api.github.com/user/170549/starred?page=4>; rel=\"last\"";
-
+        if (dst != null) {
+            destination = Paths.get(dst);
+        }
 
         URL nextUrl = new URL(String.format("https://api.github.com/users/%s/starred", userName));
         while (nextUrl != null) {

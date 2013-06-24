@@ -1,11 +1,16 @@
 buildscript {
   repositories {
     mavenCentral()
+    maven { url 'http://repository-anzix.forge.cloudbees.com/snapshot' }
   }
   dependencies {
     classpath 'com.palantir:gradle-gitsemver:0.1.2'
+    classpath 'net.anzix.build:gradle-plugins:1.0-SNAPSHOT'
+
   }
 }
+
+group = 'net.anzix'
 
 repositories {
     mavenCentral();
@@ -19,6 +24,8 @@ apply plugin: 'maven'
 apply plugin: 'idea'
 apply plugin: 'application'
 apply plugin: 'gitsemver'
+apply plugin: 'anzix-quality'
+apply plugin: 'anzix-upload'
 
 mainClassName = "net.anzix.githuballstars.Start"
 
