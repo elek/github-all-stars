@@ -1,11 +1,11 @@
 buildscript {
   repositories {
     mavenCentral()
-    maven { url 'http://repository-anzix.forge.cloudbees.com/snapshot' }
+    maven { url 'http://zx.anzix.net/repo' }
   }
   dependencies {
-    classpath 'com.palantir:gradle-gitsemver:0.1.2'
-    classpath 'net.anzix.build:gradle-plugins:1.0-SNAPSHOT'
+    classpath 'net.anzix.fork:semver-gitflow-gradle:0.2.2-SNAPSHOT'
+    classpath 'net.anzix.build:gradle-plugins:1.1.0'
 
   }
 }
@@ -14,18 +14,14 @@ group = 'net.anzix'
 
 repositories {
     mavenCentral();
-    maven { url = 'http://oss.sonatype.org/content/repositories/snapshots' }
-    maven { url = 'http://oss.sonatype.org/content/repositories/releases' }
-    maven { url = "http://repo.codahale.com" }
 }
 
 apply plugin: 'java'
 apply plugin: 'maven'
 apply plugin: 'idea'
 apply plugin: 'application'
-apply plugin: 'gitsemver'
-apply plugin: 'anzix-quality'
-apply plugin: 'anzix-upload'
+//apply plugin: 'anzix-quality'
+apply plugin: 'semver-gitflow'
 
 mainClassName = "net.anzix.githuballstars.Start"
 
@@ -42,7 +38,8 @@ dependencies {
 
 jar {
     from configurations.compile.collect { it.isDirectory() ? it : zipTree(it) }
+
     manifest {
-      attributes("Main-Class": mainClassName, "Version": version)
+      attributes("Main-Class": mainClassName)
     }
 }
